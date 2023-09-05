@@ -6,6 +6,9 @@ import { downloadUserData } from './utils/downloadUserData'
 import { isSessionActive } from './utils/isSessionActive'
 import axios from 'axios';
 onMounted(async () => {
+  /*checks in session storage if user has already been on the website -> updates the session accordingly
+   
+  */
   if (!isSessionActive()) {
 
     const uid = await downloadUserData()

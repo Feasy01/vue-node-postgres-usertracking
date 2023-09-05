@@ -6,7 +6,6 @@ const helmet = require('helmet');
 
 const app = express();
 
-// Middleware
 app.use(bodyParser.json()); // Parse JSON requests
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded requests
 app.use(cors()); // Enable Cross-Origin Resource Sharing (CORS)
@@ -15,9 +14,9 @@ app.use(helmet()); // Improve application security with HTTP headers
 
 // Routes
 const userRoutes = require('./routes/userRoutes');
+app.use('/api/users', userRoutes);
 
-app.use('/api/users', userRoutes); // User-related routes
-// Error handling middleware
+
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ error: 'Something went wrong!' });
@@ -26,7 +25,7 @@ app.use((err, req, res, next) => {
 const sequelize = require('./config/db')
 const User = require('./models/userModel')
 
-
+// syncs database with defined model
 sequelize
     .sync()
 module.exports = app;

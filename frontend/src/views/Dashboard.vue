@@ -8,6 +8,7 @@ const numberOfUsersSeenAvatar = ref(0);
 const loading = ref(true);
 
 onBeforeMount(async () => {
+    /*before components render -> sends async request for users count from the database */
     try {
         let data;
         await axios.get(`http://${import.meta.env.VITE_API_ADDRESS}:${import.meta.env.VITE_API_PORT}` + '/api/users/getUsersCount').then((response) => {

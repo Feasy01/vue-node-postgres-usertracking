@@ -6,6 +6,9 @@ defineProps(['imgSrc'])
 const componentRef = ref(null);
 
 const handleIntersection = async (entries) => {
+    /*
+    Checks if the avatar is intersecting with the window and updates the status on the backend
+    */
     for (const entry of entries) {
         if (entry.isIntersecting && !isAvatarSeen()) {
             sessionStorage.setItem('seenAvatar', true);
@@ -25,7 +28,7 @@ const handleIntersection = async (entries) => {
     }
 };
 
-
+//observer object with null root -> mounts to the window
 const observer = new IntersectionObserver(handleIntersection, {
     root: null,
     threshold: 1,
@@ -33,6 +36,8 @@ const observer = new IntersectionObserver(handleIntersection, {
 onMounted(() => {
     if (componentRef.value) { observer.observe(componentRef.value) };
 });
+
+//important to destroy observer on component dismount
 onBeforeUnmount(() => {
     if (observer) {
         observer.disconnect();
