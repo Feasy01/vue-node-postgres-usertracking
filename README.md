@@ -15,8 +15,8 @@ To get this project up and running, follow these steps:
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/Feasy01/vue-node-postgre-usertracking.git
-   cd vue-node-postgre-usertracking
+   git clone https://github.com/Feasy01/vue-node-postgres-usertracking.git
+   cd vue-node-postgres-usertracking
    ```
 
 2. **Set Environment Variables:**
