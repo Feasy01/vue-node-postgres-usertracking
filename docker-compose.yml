@@ -1,0 +1,36 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "80:80"
+    environment:
+      - VITE_API_ADDRESS=backend # Use the service name as the hostname
+      - VITE_API_PORT=3000 # Specify the backend port as an environment variable
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    environment:
+      - DB_HOST=database # Use the service name as the hostname
+      - DB_PORT=5432 # Default PostgreSQL port
+      - DB_NAME=mydb # Replace with your database name
+      - DB_USER=myuser # Replace with your database username
+      - DB_PASSWORD=mypassword # Replace with your database password
+  database:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_USER=myuser
+      - POSTGRES_DB=mydb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
